@@ -69,7 +69,10 @@ function getData() {
 function saveData(data) {
   // Check that the passed in data is valid
   if (typeof data !== "object" || data === null) {
-    console.error("[storage] saveData() received invalid data:", data);
+    console.error(
+      "An error occurred because saveData() got invalid data.",
+      data,
+    );
     return;
   }
   // Convert the object into a string and save it

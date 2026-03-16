@@ -1,0 +1,109 @@
+/* ===== Create Post ===== */
+
+.create-post{
+background:white;
+padding:15px;
+border-radius:10px;
+
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.create-post textarea{
+padding:10px;
+border:1px solid #ccc;
+border-radius:6px;
+resize:none;
+}
+
+.create-post button{
+align-self:flex-end;
+
+background:#2563eb;
+color:white;
+padding:8px 16px;
+
+border-radius:6px;
+}
+
+.create-post button:hover{
+background:#1e40af;
+}
+
+/* ===== Post Card ===== */
+
+.post{
+background:white;
+padding:15px;
+border-radius:10px;
+
+display:flex;
+flex-direction:column;
+gap:10px;
+
+box-shadow:0 2px 5px rgba(0,0,0,0.05);
+}
+
+.post-header{
+display:flex;
+justify-content:space-between;
+font-weight:bold;
+}
+
+.post-content{
+font-size:15px;
+}
+
+/* ===== Post Actions ===== */
+
+.post-actions{
+display:flex;
+gap:20px;
+}
+
+.post-actions button{
+background:none;
+color:#555;
+font-weight:bold;
+}
+
+.post-actions button:hover{
+color:#2563eb;
+}
+
+/* ===== Comments ===== */
+
+.comments{
+display:flex;
+flex-direction:column;
+gap:8px;
+margin-top:10px;
+}
+
+.comment{
+background:#f1f5f9;
+padding:8px;
+border-radius:6px;
+}
+
+/* ===== Add Comment ===== */
+
+.add-comment{
+display:flex;
+gap:10px;
+}
+
+.add-comment input{
+flex:1;
+padding:6px;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+.add-comment button{
+background:#2563eb;
+color:white;
+padding:6px 12px;
+border-radius:6px;
+}

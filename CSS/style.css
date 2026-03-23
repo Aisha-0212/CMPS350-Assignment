@@ -1,44 +1,76 @@
 /* ===== Global Reset ===== */
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-font-family: Arial, Helvetica, sans-serif;
-background:#f3f4f6;
-color:#333;
-line-height:1.6;
+/* ===== Body ===== */
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f3f4f6;
+  color: #333;
+  line-height: 1.6;
 }
 
 /* ===== Links ===== */
 
-a{
-text-decoration:none;
-color:inherit;
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: 0.3s;
+}
+
+a:hover {
+  opacity: 0.8;
 }
 
 /* ===== Buttons ===== */
 
-button{
-cursor:pointer;
-border:none;
-font-family:inherit;
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: 0.3s;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* ===== Inputs & Textareas ===== */
+
+input,
+textarea {
+  font-family: inherit;
+  outline: none;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #2563eb;
 }
 
 /* ===== Images ===== */
 
-img{
-max-width:100%;
-display:block;
+img {
+  max-width: 100%;
+  display: block;
+  border-radius: 6px;
 }
 
 /* ===== Containers ===== */
 
-.container{
-width:90%;
-max-width:1200px;
-margin:auto;
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* ===== Headings ===== */
+
+h1, h2, h3 {
+  color: #111827;
 }

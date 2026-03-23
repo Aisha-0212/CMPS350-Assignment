@@ -1,109 +1,193 @@
 /* ===== Create Post ===== */
 
-.create-post{
-background:white;
-padding:15px;
-border-radius:10px;
+.create-post {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
 
-display:flex;
-flex-direction:column;
-gap:10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
 }
 
-.create-post textarea{
-padding:10px;
-border:1px solid #ccc;
-border-radius:6px;
-resize:none;
+.create-post textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: none;
+  min-height: 80px;
+  font-family: inherit;
 }
 
-.create-post button{
-align-self:flex-end;
-
-background:#2563eb;
-color:white;
-padding:8px 16px;
-
-border-radius:6px;
+.create-post textarea:focus {
+  outline: none;
+  border-color: #2563eb;
 }
 
-.create-post button:hover{
-background:#1e40af;
+.create-post button {
+  align-self: flex-end;
+  background: #2563eb;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.create-post button:hover {
+  background: #1e40af;
+  transform: scale(1.05);
 }
 
 /* ===== Post Card ===== */
 
-.post{
-background:white;
-padding:15px;
-border-radius:10px;
+.post {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
 
-display:flex;
-flex-direction:column;
-gap:10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
-box-shadow:0 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+
+  animation: fadeIn 0.3s ease-in;
 }
 
-.post-header{
-display:flex;
-justify-content:space-between;
-font-weight:bold;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.post-content{
-font-size:15px;
+/* ===== Post Header ===== */
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* ===== Post Content ===== */
+
+.post-content {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #333;
 }
 
 /* ===== Post Actions ===== */
 
-.post-actions{
-display:flex;
-gap:20px;
+.post-actions {
+  display: flex;
+  gap: 20px;
 }
 
-.post-actions button{
-background:none;
-color:#555;
-font-weight:bold;
+.post-actions button {
+  background: none;
+  border: none;
+  color: #555;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.post-actions button:hover{
-color:#2563eb;
+.post-actions button:hover {
+  color: #2563eb;
+  transform: scale(1.05);
 }
 
-/* ===== Comments ===== */
+/* ===== Comments Section ===== */
 
-.comments{
-display:flex;
-flex-direction:column;
-gap:8px;
-margin-top:10px;
+.comments {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
 }
 
-.comment{
-background:#f1f5f9;
-padding:8px;
-border-radius:6px;
+.comments h3 {
+  font-size: 14px;
+  color: #555;
+}
+
+/* ===== Single Comment ===== */
+
+.comment {
+  background: #f1f5f9;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 14px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 /* ===== Add Comment ===== */
 
-.add-comment{
-display:flex;
-gap:10px;
+.add-comment {
+  display: flex;
+  gap: 10px;
 }
 
-.add-comment input{
-flex:1;
-padding:6px;
-border:1px solid #ccc;
-border-radius:6px;
+.add-comment input {
+  flex: 1;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
-.add-comment button{
-background:#2563eb;
-color:white;
-padding:6px 12px;
-border-radius:6px;
+.add-comment input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.add-comment button {
+  background: #2563eb;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-comment button:hover {
+  background: #1e40af;
+  transform: scale(1.05);
+}
+
+/* ===== Responsive ===== */
+
+@media (max-width: 768px) {
+
+  .post {
+    padding: 10px;
+  }
+
+  .post-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .add-comment {
+    flex-direction: column;
+  }
+
+  .create-post {
+    padding: 10px;
+  }
+
 }

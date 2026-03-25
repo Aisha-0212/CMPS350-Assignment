@@ -1,52 +1,155 @@
+/* ===== Create Post Card ===== */
 .create-post {
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    background-color: #ffe6f0; /* وردي فاتح */
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .create-post textarea {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  resize: none;
-  min-height: 80px;
+    width: 100%;
+    resize: none;
+    border: 1px solid #ffb6c1;
+    border-radius: 8px;
+    padding: 10px;
+    min-height: 80px;
 }
 
 .create-post button {
-  align-self: flex-end;
-  background: #2563eb;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
+    background-color: #e91e63;
+    color: #fff;
 }
 
-.create-post button:hover { background: #1e40af; transform: scale(1.05); }
-
+/* ===== Post Card ===== */
 .post {
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    background-color: #fff0f5; /* وردي باهت */
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.post-header { display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 14px; }
-.post-content { font-size: 15px; line-height: 1.5; color: #333; }
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #555;
+}
 
-.post-actions { display: flex; gap: 20px; }
-.post-actions button { background: none; border: none; color: #555; font-weight: bold; cursor: pointer; }
-.post-actions button:hover { color: #2563eb; transform: scale(1.05); }
+.post-content {
+    font-size: 1rem;
+    line-height: 1.4;
+}
 
-.comments { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
-.comment { background: #f1f5f9; padding: 8px; border-radius: 6px; font-size: 14px; }
-.add-comment { display: flex; gap: 10px; }
-.add-comment input { flex: 1; padding: 6px; border: 1px solid #ccc; border-radius: 6px; }
-.add-comment button { background: #2563eb; color: white; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
-.add-comment button:hover { background: #1e40af; transform: scale(1.05); }
+.post-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.post-actions button {
+    background-color: #ffc0cb; /* وردي فاتح */
+    color: #333;
+}
+
+/* ===== Comments ===== */
+.comments {
+    background-color: #ffe6f0; /* وردي فاتح */
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+
+.add-comment input {
+    width: 80%;
+    padding: 6px 8px;
+    border-radius: 8px;
+    border: 1px solid #ffb6c1;
+    margin-right: 5px;
+}
+
+.add-comment button {
+    background-color: #e91e63;
+    color: white;
+}
+
+/* ===== Profile Components ===== */
+.profile-pic-container img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 5px;
+}
+
+.upload-btn {
+    display: inline-block;
+    padding: 6px 10px;
+    background-color: #e91e63;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.profile-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#follow-btn, #update-bio-btn {
+    background-color: #e91e63;
+    color: white;
+}
+
+.profile-stats span {
+    margin-right: 15px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.edit-bio textarea {
+    width: 100%;
+    resize: none;
+    border: 1px solid #ffb6c1;
+    border-radius: 8px;
+    padding: 8px;
+    min-height: 50px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-info {
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+    .navbar ul {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .profile-posts {
+        grid-template-columns: 1fr;
+    }
+
+    .create-post textarea {
+        min-height: 60px;
+    }
+    
+}

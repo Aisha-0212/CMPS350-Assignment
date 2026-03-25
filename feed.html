@@ -6,9 +6,9 @@
   <title>Feed - Social Synapse</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="layout.css">
-  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="CSS/components.css">
+  <link rel="stylesheet" href="CSS/layout.css">
+  <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
 
@@ -16,8 +16,8 @@
   <nav class="navbar">
     <h1>Social Synapse</h1>
     <ul>
-      <li><a href="#">Profile</a></li>
-      <li><a href="#">Logout</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="index.html">Logout</a></li>
     </ul>
   </nav>
 
@@ -27,8 +27,10 @@
     <!-- ===== Left Sidebar ===== -->
     <aside class="sidebar">
       <h3>Menu</h3>
-      <p>Home</p>
-      <p>Explore</p>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Explore</a></li>
+      </ul>
     </aside>
 
     <!-- ===== Feed Section ===== -->
@@ -40,17 +42,42 @@
         <textarea id="post-input" placeholder="What's on your mind?"></textarea>
         <button id="create-post-btn">Share</button>
         <p id="post-error" style="color:red;"></p>
+        
+  <section class="post-header">
+    <p><strong>TestUser</strong></p>
+    <p class="post-timestamp">Wednesday, Mar 25, 2026, 06:30 PM</p> <!-- التاريخ ظاهر مباشرة -->
+  </section>
+  <p class="post-content">This is an example post 🌸</p>
+  <section class="post-actions">
+    <button class="like-btn" data-id="1">❤️ <span>0</span></button>
+    <button class="delete-btn" data-id="1">🗑 Delete</button>
+  </section>
+  <section class="comments">
+    <div class="existing-comments">
+      <div class="comment"><strong>Friend</strong>: Nice post!</div>
+    </div>
+    <div class="add-comment">
+      <input type="text" placeholder="Add comment..." data-id="1">
+      <button class="comment-btn" data-id="1">Post</button>
+    </div>
+  </section>
+
       </article>
 
       <!-- ===== Posts Container ===== -->
-      <section id="posts-container"></section>
+      <section id="posts-container">
+      
+      </section>
 
     </section>
 
     <!-- ===== Right Sidebar ===== -->
     <aside class="sidebar">
       <h3>Suggestions</h3>
-      <p>Follow new users</p>
+      <ul>
+        <li><a href="#">Follow new users</a></li>
+        <li><a href="#">Trending</a></li>
+      </ul>
     </aside>
 
   </main>

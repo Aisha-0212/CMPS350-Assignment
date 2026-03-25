@@ -1,32 +1,39 @@
-/* ===== Global Reset ===== */
+/* ===== General Styles ===== */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f3f4f6;
-  color: #333;
-  line-height: 1.6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffe6f0; 
+    color: #333;
 }
+
 a {
-  text-decoration: none;
-  color: inherit;
-  transition: 0.3s;
+    text-decoration: none;
+    color: #e91e63; 
 }
 
-a:hover { opacity: 0.8; }
+a:hover {
+    color: #c2185b;
+}
 
-button { cursor: pointer; border: none; font-family: inherit; transition: 0.3s; }
-button:active { transform: scale(0.97); }
+button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
 
-input, textarea { font-family: inherit; outline: none; }
-input:focus, textarea:focus { border-color: #2563eb; }
+button:hover {
+    opacity: 0.9;
+}
 
-img { max-width: 100%; display: block; border-radius: 6px; }
-
-.container { width: 90%; max-width: 1200px; margin: auto; }
-
-h1,h2,h3 { color: #111827; }
+input, textarea {
+    font-family: inherit;
+}

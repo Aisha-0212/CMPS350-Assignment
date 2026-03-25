@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Social Synapse</title>
   <link rel="stylesheet" href="CSS/loginStyle.css">
+  <style>
+   
+    input:invalid:focus {
+      border-color: red;
+    }
+    #login-error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
 
@@ -14,15 +24,21 @@
       <p class="welcome-text">Welcome back! Please login to your account 🌸</p>
 
       <form id="login-form">
-        <label for="username">Username</label>
-        <input type="text" id="username" placeholder="Enter your username">
+  <div class="input-group">
+    <label for="username">Username</label>
+    <input type="text" id="username" placeholder="Enter your username" required>
+    <div class="error-message">Username is required</div>
+  </div>
 
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Enter your password">
+  <div class="input-group">
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="Enter your password" required>
+    <div class="error-message">Password is required</div>
+  </div>
 
-        <button type="submit">Login</button>
-        <p id="login-error"></p>
-      </form>
+  <button type="submit">Login</button>
+  <p id="login-error"></p>
+</form>
 
       <p class="signup-text">
         Don't have an account? <a href="#">Sign up</a>
@@ -40,12 +56,13 @@
       const username = document.getElementById("username").value.trim();
       const password = document.getElementById("password").value.trim();
 
+    
       if (!username || !password) {
         loginError.textContent = "Both username and password are required!";
         return;
       }
 
-      // مثال بسيط: تحقق وهمي
+    
       if (username === "TestUser" && password === "1234") {
         loginError.textContent = "";
         alert("Login successful! Redirecting to Feed...");

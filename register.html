@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Social Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+
+<body>
+
+<div class="auth-container">
+    <div class="auth-card">
+        <h1>Create Account</h1>
+        <p class="auth-subtitle">Join our social platform</p>
+        <form id="registerForm">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="username" required>
+                <small id="usernameError" class="error-message"></small>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="email" required>
+                <small id="emailError" class="error-message"></small>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" required>
+                <small id="passwordError" class="error-message"></small>
+                <small class="helper-text">Minimum 6 characters</small>
+            </div>
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="password" id="confirmPassword" required>
+                <small id="confirmError" class="error-message"></small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </form>
+        <p class="auth-footer">
+            Already have an account? <a href="login.html">Login here</a>
+        </p>
+    </div>
+</div>
+
+<script src="JavaScript/storage.js"></script>
+<script src="JavaScript/utils.js"></script>
+<script src="JavaScript/auth.js"></script>
+
+<script>
+    //init data
+    initAppData();
+    //redirect if already logged in
+    if (isLoggedIn()) {
+        window.location.href = "feed.html";
+    }
+    const form = document.getElementById("registerForm");
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        clearErrors();
+        let username = document.getElementById("username").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let password = document.getElementById("password").value;
+        let confirm = document.getElementById("confirmPassword").value;
+        if (password != confirm) {
+            showError("confirmError", "Passwords do not match");
+            return;
+        }
+        let result = createUser(username, email, password);
+        if (result.success) {
+            window.location.href = "feed.html";
+        } else {
+            let msg = result.message.toLowerCase();
+            if (msg.indexOf("username") !== -1) {
+                showError("usernameError", result.message);
+            } else if (msg.indexOf("email") !== -1) {
+                showError("emailError", result.message);
+            } else if (msg.indexOf("password") !== -1) {
+                showError("passwordError", result.message);
+            } else {
+                showError("emailError", result.message);
+            }
+        }
+    });
+
+
+
+
+
+    function clearErrors() {
+        let ids = ["usernameError", "emailError", "passwordError", "confirmError"];
+        for (let i = 0; i < ids.length; i++) {
+            let el = document.getElementById(ids[i]);
+            if (el) {
+                el.textContent = "";
+            }
+        }
+    }
+
+
+
+
+
+    function showError(id, msg) {
+        let el = document.getElementById(id);
+        if (el) {
+            el.textContent = msg;
+        }
+    }
+
+
+    // real-time validation for password and confirm password while typing
+    document.getElementById("username").addEventListener("input", function() {
+        let r = validateUsername(this.value);
+
+        if (!r.isValid && this.value) {
+            showError("usernameError", r.message);
+        } else {
+            showError("usernameError", "");
+        }
+    });
+    document.getElementById("email").addEventListener("input", function() {
+        let r = validateEmail(this.value);
+
+        if (!r.isValid && this.value) {
+            showError("emailError", r.message);
+        } else {
+            showError("emailError", "");
+        }
+    });
+    document.getElementById("password").addEventListener("input", function() {
+        let r = validatePassword(this.value);
+
+        if (!r.isValid && this.value) {
+            showError("passwordError", r.message);
+        } else {
+            showError("passwordError", "");
+        }
+    });
+    document.getElementById("confirmPassword").addEventListener("input", function() {
+        let pass = document.getElementById("password").value;
+
+        if (this.value != pass && this.value) {
+            showError("confirmError", "Passwords do not match");
+        } else {
+            showError("confirmError", "");
+        }
+    });
+
+</script>
+
+</body>
+</html>

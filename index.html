@@ -1,13 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feed - Social Synapse</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="layout.css">
+  <link rel="stylesheet" href="components.css">
 </head>
 <body>
-    <script src="JavaScript/storage.js"></script>
-    <script src="JavaScript/index.js"></script>
-    
+
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar">
+    <h1>Social Synapse</h1>
+    <ul>
+      <li><a href="#">Profile</a></li>
+      <li><a href="#">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== Main Container ===== -->
+  <main class="container">
+
+    <!-- ===== Left Sidebar ===== -->
+    <aside class="sidebar">
+      <h3>Menu</h3>
+      <p>Home</p>
+      <p>Explore</p>
+    </aside>
+
+    <!-- ===== Feed Section ===== -->
+    <section class="feed">
+
+      <!-- ===== Create Post ===== -->
+      <article class="create-post">
+        <h2>Create Post</h2>
+        <textarea id="post-input" placeholder="What's on your mind?"></textarea>
+        <button id="create-post-btn">Share</button>
+        <p id="post-error" style="color:red;"></p>
+      </article>
+
+      <!-- ===== Posts Container ===== -->
+      <section id="posts-container"></section>
+
+    </section>
+
+    <!-- ===== Right Sidebar ===== -->
+    <aside class="sidebar">
+      <h3>Suggestions</h3>
+      <p>Follow new users</p>
+    </aside>
+
+  </main>
+
+  <!-- ===== JS ===== -->
+  <script src="feed.js"></script>
+
 </body>
 </html>

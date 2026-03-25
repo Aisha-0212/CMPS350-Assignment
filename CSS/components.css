@@ -189,5 +189,158 @@
   .create-post {
     padding: 10px;
   }
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  border-bottom: 1px solid #ddd;
+}
 
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+/* PROFILE HEADER */
+.profile-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.profile-header {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.profile-header img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* PROFILE INFO */
+.profile-info {
+  flex: 1;
+}
+
+.profile-top {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-top h2 {
+  font-size: 24px;
+}
+
+.profile-top button {
+  padding: 6px 14px;
+  border: none;
+  background: #0095f6;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.profile-top button:hover {
+  background: #0077cc;
+}
+
+/* STATS */
+.profile-stats {
+  display: flex;
+  gap: 20px;
+  margin: 15px 0;
+}
+
+.profile-stats span {
+  font-size: 14px;
+}
+
+/* BIO */
+#bio {
+  margin-bottom: 10px;
+}
+
+/* EDIT BIO */
+.edit-bio textarea {
+  width: 100%;
+  height: 60px;
+  margin-bottom: 5px;
+}
+
+.edit-bio button {
+  padding: 5px 10px;
+  border: none;
+  background: black;
+  color: white;
+  cursor: pointer;
+}
+
+/* POSTS GRID */
+.profile-posts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.profile-post {
+  background: #eee;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-post:hover {
+  background: #b94141;
+}
+#profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+.profile-pic-container {
+  display: flex;
+  flex-direction: column;  
+  align-items: center;      
+  gap: 10px;
+}
+
+#profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+#profile-pic-input {
+  font-size: 12px;
+}
+.upload-btn {
+  padding: 6px 12px;
+  background: #f60067;
+  color: rgb(255, 255, 255);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
 }

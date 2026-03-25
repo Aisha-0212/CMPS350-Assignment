@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - Social Synapse</title>
+
+  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="stylesheet" href="CSS/layout.css">
+  <link rel="stylesheet" href="CSS/components.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <h1>Social Synapse</h1>
+    <ul>
+      <li><a href="feed.html">Feed</a></li>
+      <li><a href="index.html">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- PROFILE SECTION -->
+  <main class="profile-container">
+
+    <!-- TOP PROFILE -->
+    <section class="profile-header">
+        <div class="profile-pic-container">
+        <img id="profile-pic" src="https://d2zp5xs5cp8zlg.cloudfront.net/image-34080-800.jpg" alt="Profile Picture">
+        <label for="profile-pic-input" class="upload-btn">Edit Profile Picture</label>
+        <input type="file" id="profile-pic-input" hidden>
+    </div>
+
+      <div class="profile-info">
+
+        <div class="profile-top">
+          <h2 id="username">username</h2>
+          <button id="follow-btn">Follow</button>
+        </div>
+
+        <div class="profile-stats">
+          <span><strong id="post-count">0</strong> posts</span>
+          <span><strong id="followers-count">0</strong> followers</span>
+          <span><strong id="following-count">0</strong> following</span>
+        </div>
+
+        <p id="bio">This is bio...</p>
+
+        <!-- EDIT BIO -->
+        <div class="edit-bio">
+          <textarea id="bio-input" placeholder="Update your bio..."></textarea>
+          <button id="update-bio-btn">Update Bio</button>
+          <p id="bio-error"></p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- POSTS GRID -->
+    <section class="profile-posts" id="profile-posts">
+      <!-- Posts will render here -->
+    </section>
+
+  </main>
+
+  <script src="JavaScript/storage.js"></script>
+  <script src="JavaScript/posts.js"></script>
+  <script src="JavaScript/profile.js"></script>
+
+</body>
+</html>

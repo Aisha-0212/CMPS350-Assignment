@@ -1,4 +1,4 @@
-// auth.js
+
 
 function registerUser(username, email, password) {
     if (username == "" || email == "" || password == "") {

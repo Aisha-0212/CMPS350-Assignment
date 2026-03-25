@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Social Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+
+
+<body>
+<div class="auth-container">
+    <div class="auth-card">
+        <h1>Welcome Back</h1>
+        <p class="auth-subtitle">Log in to your account</p>
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="email" required>
+                <small id="emailError" class="error-message"></small>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" required>
+                <small id="passwordError" class="error-message"></small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+        <p class="auth-footer">
+            Don't have an account? <a href="register.html">Register here</a>
+        </p>
+    </div>
+</div>
+
+<script src="JavaScript/storage.js"></script>
+<script src="JavaScript/utils.js"></script>
+<script src="JavaScript/auth.js"></script>
+
+<script>
+    initAppData();
+    if (isLoggedIn()) {
+        window.location.href = "feed.html";
+    }
+    const form = document.getElementById("loginForm");
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        document.getElementById("emailError").textContent = "";
+        document.getElementById("passwordError").textContent = "";
+        let email = document.getElementById("email").value.trim();
+        let password = document.getElementById("password").value;
+        if (email == "" || password == "") {
+            document.getElementById("passwordError").textContent = "Email and password are required";
+            return;
+        }
+        let result = loginUser(email, password);
+        if (result.success) {
+            window.location.href = "feed.html";
+        } else {
+            let msg = result.message.toLowerCase();
+
+            if (msg.indexOf("email") !== -1 || msg.indexOf("account") !== -1) {
+                document.getElementById("emailError").textContent = result.message;
+            } else {
+                document.getElementById("passwordError").textContent = result.message;
+            }
+        }
+    });
+
+</script>
+</body>
+
+</html>

@@ -151,5 +151,18 @@
     .create-post textarea {
         min-height: 60px;
     }
-    
+    /* ===== Logout Button ===== */
+.logout-btn {
+  background: #ff4d6d; 
+  padding: 6px 14px;
+  border-radius: 20px;
+  color: white !important;
+  font-weight: bold;
+  transition: 0.3s;
 }
+
+.logout-btn:hover {
+  background: #ff1e4d;
+  transform: scale(1.05);
+}
+  }

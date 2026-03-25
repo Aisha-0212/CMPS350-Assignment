@@ -7,17 +7,35 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="CSS/components.css">
-    <link rel="stylesheet" href="CSS/layout.css">
-    <link rel="stylesheet" href="CSS/style.css">
+  <link rel="stylesheet" href="CSS/layout.css">
+  <link rel="stylesheet" href="CSS/style.css">
+
+  <style>
+    /* Logout */
+    .logout-btn {
+      background: #ff4d6d;
+      padding: 6px 14px;
+      border-radius: 20px;
+      color: white !important;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .logout-btn:hover {
+      background: #ff1e4d;
+      transform: scale(1.05);
+    }
+  </style>
 </head>
+
 <body>
 
   <!-- ===== Navbar ===== -->
   <nav class="navbar">
     <h1>Social Synapse</h1>
     <ul>
-      <li><a href="#">Profile</a></li>
-      <li><a href="#">Logout</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="#" class="logout-btn" onclick="logout()">Logout</a></li>
     </ul>
   </nav>
 
@@ -57,6 +75,15 @@
 
   <!-- ===== JS ===== -->
   <script src="feed.js"></script>
+
+  <!-- Logout Script -->
+  <script>
+    function logout() {
+      if (confirm("Are you sure you want to logout?")) {
+        window.location.href = "index.html";
+      }
+    }
+  </script>
 
 </body>
 </html>

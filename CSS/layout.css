@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #ffb6c1; /* وردي فاتح */
+    background-color: #ffb6c1; 
     padding: 12px 20px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     position: sticky;
@@ -28,7 +28,7 @@
 
 .sidebar {
     flex: 1;
-    background-color: #fff0f5; /* وردي باهت */
+    background-color: #fff0f5; 
     padding: 15px;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -52,7 +52,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    background-color: #fff0f5; /* وردي باهت */
+    background-color: #fff0f5; 
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);

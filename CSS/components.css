@@ -1,6 +1,6 @@
 /* ===== Create Post Card ===== */
 .create-post {
-    background-color: #ffe6f0; /* وردي فاتح */
+    background-color: #ffe6f0; 
     padding: 15px;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -25,7 +25,7 @@
 
 /* ===== Post Card ===== */
 .post {
-    background-color: #fff0f5; /* وردي باهت */
+    background-color: #fff0f5; 
     padding: 15px;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
@@ -52,13 +52,13 @@
 }
 
 .post-actions button {
-    background-color: #ffc0cb; /* وردي فاتح */
+    background-color: #ffc0cb; 
     color: #333;
 }
 
 /* ===== Comments ===== */
 .comments {
-    background-color: #ffe6f0; /* وردي فاتح */
+    background-color: #ffe6f0; 
     padding: 10px;
     border-radius: 10px;
     font-size: 0.9rem;

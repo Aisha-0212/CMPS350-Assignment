@@ -143,5 +143,31 @@ function getPostById(postId){
 
 }
 
+// ===== Render Profile Posts =====
+function renderProfilePosts(userId) {
+    const data = getData();
+    const userPosts = data.posts.filter(p => p.authorId === userId)
+        .sort((a, b) => b.timestamp - a.timestamp);
+
+    const postsGrid = document.getElementById("profile-posts");
+    postsGrid.innerHTML = "";
+
+    if (userPosts.length === 0) {
+        postsGrid.innerHTML = "<p>No posts yet.</p>";
+        return;
+    }
+
+    userPosts.forEach(post => {
+        const postEl = document.createElement("div");
+        postEl.classList.add("post");
+        const preview = post.content.length > 100 ? post.content.substring(0, 100) + "..." : post.content;
+        postEl.innerHTML = `
+            <p>${preview}</p>
+            <small>${new Date(post.timestamp).toLocaleDateString()}</small>
+        `;
+        postsGrid.appendChild(postEl);
+    });
+}
+
 
 

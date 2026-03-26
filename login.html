@@ -1,77 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - Social Synapse</title>
-  <link rel="stylesheet" href="CSS/loginStyle.css">
-  <style>
-   
-    input:invalid:focus {
-      border-color: red;
-    }
-    #login-error {
-      color: red;
-      margin-top: 10px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Social Platform</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/layout.css">
+    <link rel="stylesheet" href="CSS/components.css">
 </head>
 <body>
-
-  <div class="login-container">
+<div class="login-container">
     <div class="login-card">
-      <h1>Social Synapse</h1>
-      <p class="welcome-text">Welcome back! Please login to your account 🌸</p>
-
-      <form id="login-form">
-  <div class="input-group">
-    <label for="username">Username</label>
-    <input type="text" id="username" placeholder="Enter your username" required>
-    <div class="error-message">Username is required</div>
-  </div>
-
-  <div class="input-group">
-    <label for="password">Password</label>
-    <input type="password" id="password" placeholder="Enter your password" required>
-    <div class="error-message">Password is required</div>
-  </div>
-
-  <button type="submit">Login</button>
-  <p id="login-error"></p>
-</form>
-
-      <p class="signup-text">
-        Don't have an account? <a href="#">Sign up</a>
-      </p>
+        <h1>Welcome Back</h1>
+        <p class="welcome-text">Log in to your account</p>
+        <form id="loginForm">
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+                <small id="emailError" class="error-message"></small>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+                <small id="passwordError" class="error-message"></small>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <p class="signup-text">
+            Don't have an account? <a href="register.html">Register here</a>
+        </p>
     </div>
-  </div>
+</div>
 
-  <script>
-    const loginForm = document.getElementById("login-form");
-    const loginError = document.getElementById("login-error");
-
-    loginForm.addEventListener("submit", e => {
-      e.preventDefault();
-
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value.trim();
-
-    
-      if (!username || !password) {
-        loginError.textContent = "Both username and password are required!";
-        return;
-      }
-
-    
-      if (username === "TestUser" && password === "1234") {
-        loginError.textContent = "";
-        alert("Login successful! Redirecting to Feed...");
-        window.location.href = "feed.html"; 
-      } else {
-        loginError.textContent = "Invalid username or password!";
-      }
+<script src="JavaScript/storage.js"></script>
+<script src="JavaScript/utils.js"></script>
+<script src="JavaScript/auth.js"></script>
+<script>
+    initAppData();
+    if (isLoggedIn()) {
+        window.location.href = "feed.html";
+    }
+    const form = document.getElementById("loginForm");
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        document.getElementById("emailError").textContent = "";
+        document.getElementById("passwordError").textContent = "";
+        let email = document.getElementById("email").value.trim();
+        let password = document.getElementById("password").value;
+        if (email === "" || password === "") {
+            document.getElementById("passwordError").textContent = "Email and password are required";
+            return;
+        }
+        let result = loginUser(email, password);
+        if (result.success) {
+            window.location.href = "feed.html";
+        } else {
+            let msg = result.message.toLowerCase();
+            if (msg.indexOf("email") !== -1 || msg.indexOf("account") !== -1) {
+                document.getElementById("emailError").textContent = result.message;
+            } else {
+                document.getElementById("passwordError").textContent = result.message;
+            }
+        }
     });
-  </script>
-
+</script>
 </body>
 </html>

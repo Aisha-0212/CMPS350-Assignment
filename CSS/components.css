@@ -33,7 +33,6 @@
     flex-direction: column;
     gap: 10px;
 }
-
 .post-header {
     display: flex;
     justify-content: space-between;
@@ -122,35 +121,13 @@
     min-height: 50px;
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 900px) {
-    .container {
-        flex-direction: column;
-    }
-
-    .profile-header {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .profile-info {
-        width: 100%;
-    }
+.login-container{
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    margin: 0 auto;
 }
 
-@media (max-width: 500px) {
-    .navbar ul {
-        flex-direction: column;
-        gap: 5px;
-    }
-
-    .profile-posts {
-        grid-template-columns: 1fr;
-    }
-
-    .create-post textarea {
-        min-height: 60px;
-    }
     /* ===== Logout Button ===== */
 .logout-btn {
   background: #ff4d6d; 
@@ -165,4 +142,134 @@
   background: #ff1e4d;
   transform: scale(1.05);
 }
-  }
+
+
+.login-card {
+  background: #ffe4ec;
+  padding: 30px 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.login-card h1 {
+  margin-bottom: 10px;
+  color: #ff1493;
+}
+
+.welcome-text {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* ===== Input Group ===== */
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block; 
+  margin-bottom: 5px;
+  color: #ff1493;
+  font-weight: bold;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ff69b4;
+  outline: none;
+}
+
+#users-list{
+    margin: 1rem;
+}
+/* ===== Signup Text ===== */
+.signup-text {
+  margin-top: 15px;
+  font-size: 13px;
+}
+
+.signup-text a {
+  color: #ff1493;
+  text-decoration: none;
+}
+
+.signup-text a:hover {
+  text-decoration: underline;
+}
+
+.splash {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    animation: fadeIn 0.6s ease forwards;
+    }
+
+.logo-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 30px;
+    animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+    }
+
+.logo-name {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e91e63;
+    letter-spacing: -0.5px;
+    animation: slideUp 0.5s ease 0.35s both;
+    }
+
+.logo-tagline {
+    font-size: 0.85rem;
+    color: #c2185b;
+    opacity: 0.75;
+    letter-spacing: 0.5px;
+    animation: slideUp 0.5s ease 0.45s both;
+    }
+
+.dots {
+    display: flex;
+    gap: 6px;
+    margin-top: 30px;
+    animation: slideUp 0.5s ease 0.55s both;
+    }
+
+.dots span {
+    width: 7px;
+    height: 7px;
+    background-color: #e91e63;
+    border-radius: 50%;
+    animation: bounce 1s infinite ease-in-out;
+    }
+
+.dots span:nth-child(2) { animation-delay: 0.15s; }
+.dots span:nth-child(3) { animation-delay: 0.30s; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    @keyframes popIn {
+      from { transform: scale(0.6); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(14px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0.7); opacity: 0.5; }
+      40%            { transform: scale(1.2); opacity: 1;   }
+    }
+
+body:has(.splash){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 100dvh;
+    }

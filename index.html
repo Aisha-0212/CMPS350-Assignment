@@ -3,86 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feed - Social Synapse</title>
-
-  <!-- CSS -->
+  <title>Social Synapse</title>
   <link rel="stylesheet" href="CSS/components.css">
   <link rel="stylesheet" href="CSS/layout.css">
   <link rel="stylesheet" href="CSS/style.css">
-
-  <style>
-    /* Logout */
-    .logout-btn {
-      background: #ff4d6d;
-      padding: 6px 14px;
-      border-radius: 20px;
-      color: white !important;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    .logout-btn:hover {
-      background: #ff1e4d;
-      transform: scale(1.05);
-    }
-  </style>
 </head>
-
 <body>
 
-  <!-- ===== Navbar ===== -->
-  <nav class="navbar">
-    <h1>Social Synapse</h1>
-    <ul>
-      <li><a href="profile.html">Profile</a></li>
-      <li><a href="#" class="logout-btn" onclick="logout()">Logout</a></li>
-    </ul>
-  </nav>
+  <div class="splash">
+    <img class="logo-img" src="assets/logo.png" alt="Social Synapse Logo">
+    <h1 class="logo-name">Social Synapse</h1>
+    <p class="logo-tagline">Connect · Share · Discover</p>
+    <div class="dots">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
 
-  <!-- ===== Main Container ===== -->
-  <main class="container">
-
-    <!-- ===== Left Sidebar ===== -->
-    <aside class="sidebar">
-      <h3>Menu</h3>
-      <p>Home</p>
-      <p>Explore</p>
-    </aside>
-
-    <!-- ===== Feed Section ===== -->
-    <section class="feed">
-
-      <!-- ===== Create Post ===== -->
-      <article class="create-post">
-        <h2>Create Post</h2>
-        <textarea id="post-input" placeholder="What's on your mind?"></textarea>
-        <button id="create-post-btn">Share</button>
-        <p id="post-error" style="color:red;"></p>
-      </article>
-
-      <!-- ===== Posts Container ===== -->
-      <section id="posts-container"></section>
-
-    </section>
-
-    <!-- ===== Right Sidebar ===== -->
-    <aside class="sidebar">
-      <h3>Suggestions</h3>
-      <p>Follow new users</p>
-    </aside>
-
-  </main>
-
-  <!-- ===== JS ===== -->
-  <script src="feed.js"></script>
-
-  <!-- Logout Script -->
+  <script src="JavaScript/storage.js"></script>
+  <script src="JavaScript/utils.js"></script>
+  <script src="JavaScript/auth.js"></script>
   <script>
-    function logout() {
-      if (confirm("Are you sure you want to logout?")) {
-        window.location.href = "index.html";
-      }
-    }
+    initAppData();
+    
+    setTimeout(function () {
+        if (isLoggedIn()) {
+            window.location.href = "feed.html";
+        } else {
+            window.location.href = "login.html";
+        }
+    }, 2000);
   </script>
 
 </body>

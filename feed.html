@@ -23,22 +23,12 @@
     <li><a href="register.html">Register</a></li>
     <li><a href="feed.html">Feed</a></li>
     <li><a href="profile.html">Profile</a></li>
-    <li><a href="index.html">Logout</a></li>
+    <li><a href="#" onclick="logoutUser(); window.location.href='index.html';">Logout</a></li>
   </ul>
 </nav>
 
   <!-- ===== Main Container ===== -->
   <main class="container">
-
-    <!-- ===== Left Sidebar ===== -->
-    <aside class="sidebar">
-      <h3>Menu</h3>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Explore</a></li>
-      </ul>
-    </aside>
-
     <!-- ===== Feed Section ===== -->
     <section class="feed">
 
@@ -48,26 +38,6 @@
         <textarea id="post-input" placeholder="What's on your mind?"></textarea>
         <button id="create-post-btn">Share</button>
         <p id="post-error" style="color:red;"></p>
-        
-  <section class="post-header">
-    <p><strong>TestUser</strong></p>
-    <p class="post-timestamp">Wednesday, Mar 25, 2026, 06:30 PM</p> <!-- التاريخ ظاهر مباشرة -->
-  </section>
-  <p class="post-content">This is an example post 🌸</p>
-  <section class="post-actions">
-    <button class="like-btn" data-id="1">❤️ <span>0</span></button>
-    <button class="delete-btn" data-id="1">🗑 Delete</button>
-  </section>
-  <section class="comments">
-    <div class="existing-comments">
-      <div class="comment"><strong>Friend</strong>: Nice post!</div>
-    </div>
-    <div class="add-comment">
-      <input type="text" placeholder="Add comment..." data-id="1">
-      <button class="comment-btn" data-id="1">Post</button>
-    </div>
-  </section>
-
       </article>
 
       <!-- ===== Posts Container ===== -->
@@ -81,16 +51,18 @@
     <!-- ===== Right Sidebar ===== -->
     <aside class="sidebar">
       <h3>Suggestions</h3>
-      <ul>
-        <li><a href="#">Follow new users</a></li>
-        <li><a href="#">Trending</a></li>
-      </ul>
+      <ul id="users-list"></ul>
     </aside>
 
   </main>
 
   <!-- ===== JS ===== -->
-  <script src="feed.js"></script>
+  <script src="JavaScript/storage.js"></script>
+  <script src="JavaScript/utils.js"></script>
+  <script src="JavaScript/auth.js"></script>
+  <script src="JavaScript/posts.js"></script>
+  <script src="JavaScript/profile.js"></script>
+  <script src="JavaScript/feed.js"></script>
 
 </body>
 </html>

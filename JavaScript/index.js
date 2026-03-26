@@ -1,6 +1,6 @@
 initAppData();
 
-const user = getCurentUser();
+const user = getCurrentUser();
 if(user){
     window.location.href="feed.html"
 }

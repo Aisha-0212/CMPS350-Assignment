@@ -1,46 +1,39 @@
-import userRepo from "./userRepo";
-import postRepo from "./postRepo";
-import commentRepo from "./commentRepo";
+import UserRepo from "./UserRepo.js";
+import PostRepo from "./PostRepo.js";
+import CommentRepo from "./CommentRepo.js";
 
-const statsRepo = {
-
+const StatsRepo = {
   async getAverageFollowersPerUser() {
-    const users = await userRepo.getAll();
+    const users = await UserRepo.getAll();
     if (!users.length) return 0;
 
-    let total = 0;
-    users.forEach(u => total += u.followers?.length || 0);
-
+    const total = users.reduce((sum, u) => sum + (u.followers?.length || 0), 0);
     return total / users.length;
   },
 
   async getAveragePostsPerUser() {
-    const users = await userRepo.getAll();
+    const users = await UserRepo.getAll();
     if (!users.length) return 0;
 
-    let total = 0;
-    for (let u of users) {
-      const posts = await postRepo.getFeedPosts(u.id);
-      total += posts.length;
-    }
-
+    const total = users.reduce((sum, u) => sum + (u.posts?.length || 0), 0);
     return total / users.length;
   },
 
   async getMostActiveUser() {
-    const users = await userRepo.getAll();
+    const users = await UserRepo.getAll();
+    if (!users.length) return null;
+
     let max = 0;
     let result = null;
 
-    for (let u of users) {
-      const posts = await postRepo.getFeedPosts(u.id);
-
-      if (posts.length > max) {
-        max = posts.length;
+    for (const u of users) {
+      const count = u.posts?.length || 0;
+      if (count > max) {
+        max = count;
         result = {
           userId: u.id,
           username: u.username,
-          postCount: posts.length
+          postCount: count,
         };
       }
     }
@@ -49,11 +42,11 @@ const statsRepo = {
   },
 
   async getMostLikedPost() {
-    const users = await userRepo.getAll();
+    const users = await UserRepo.getAll();
     let allPosts = [];
 
-    for (let u of users) {
-      const posts = await postRepo.getFeedPosts(u.id);
+    for (const u of users) {
+      const posts = await PostRepo.getFeedPosts(u.id);
       allPosts = allPosts.concat(posts);
     }
 
@@ -61,7 +54,7 @@ const statsRepo = {
 
     let top = allPosts[0];
 
-    allPosts.forEach(p => {
+    allPosts.forEach((p) => {
       if ((p.likes?.length || 0) > (top.likes?.length || 0)) {
         top = p;
       }
@@ -70,45 +63,44 @@ const statsRepo = {
     return {
       postId: top.id,
       content: top.content,
-      likes: top.likes?.length || 0
+      likes: top.likes?.length || 0,
     };
   },
 
   async getPostsPerMonth() {
-    const users = await userRepo.getAll();
+    const users = await UserRepo.getAll();
     let allPosts = [];
 
-    for (let u of users) {
-      const posts = await postRepo.getFeedPosts(u.id);
+    for (const u of users) {
+      const posts = await PostRepo.getFeedPosts(u.id);
       allPosts = allPosts.concat(posts);
     }
 
     const result = {};
 
-    allPosts.forEach(p => {
-      const m = new Date(p.createdAt).toLocaleString("default", { month: "short" });
+    allPosts.forEach((p) => {
+      const m = new Date(p.createdAt).toLocaleString("default", {
+        month: "short",
+      });
       result[m] = (result[m] || 0) + 1;
     });
 
-    return Object.keys(result).map(m => ({
-      month: m,
-      count: result[m]
-    }));
+    return Object.keys(result).map((m) => ({ month: m, count: result[m] }));
   },
 
   async getMostCommonWord() {
-    const users = await userRepo.getAll();
+    const users = await UserRepo.getAll();
     let allPosts = [];
 
-    for (let u of users) {
-      const posts = await postRepo.getFeedPosts(u.id);
+    for (const u of users) {
+      const posts = await PostRepo.getFeedPosts(u.id);
       allPosts = allPosts.concat(posts);
     }
 
     const map = {};
 
-    allPosts.forEach(p => {
-      p.content.split(/\s+/).forEach(word => {
+    allPosts.forEach((p) => {
+      p.content.split(/\s+/).forEach((word) => {
         const w = word.toLowerCase().replace(/[^\w]/g, "");
         if (!w) return;
         map[w] = (map[w] || 0) + 1;
@@ -116,29 +108,28 @@ const statsRepo = {
     });
 
     let max = 0;
-    let word = "";
+    let top = "";
 
-    for (let k in map) {
+    for (const k in map) {
       if (map[k] > max) {
         max = map[k];
-        word = k;
+        top = k;
       }
     }
 
-    return word;
+    return top;
   },
 
   async getTopCommenters() {
-    const users = await userRepo.getAll();
+    const users = await UserRepo.getAll();
     const arr = [];
 
-    for (let u of users) {
-      const comments = await commentRepo.getByUser?.(u.id) || [];
-
+    for (const u of users) {
+      const comments = await CommentRepo.getByUser(u.id);
       arr.push({
         userId: u.id,
         username: u.username,
-        commentCount: comments.length
+        commentCount: comments.length,
       });
     }
 
@@ -146,26 +137,26 @@ const statsRepo = {
   },
 
   async getMostFollowedUser() {
-    const users = await userRepo.getAll();
+    const users = await UserRepo.getAll();
+    if (!users.length) return null;
 
     let max = 0;
     let top = null;
 
-    users.forEach(u => {
+    users.forEach((u) => {
       const c = u.followers?.length || 0;
-
       if (c > max) {
         max = c;
         top = {
           userId: u.id,
           username: u.username,
-          followers: c
+          followers: c,
         };
       }
     });
 
     return top;
-  }
+  },
 };
 
-export default statsRepo;
+export default StatsRepo;

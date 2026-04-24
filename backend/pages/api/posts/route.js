@@ -21,7 +21,7 @@ export async function GET(request) {
 
 export async function POST(request) {
   const body = await request.json();
-  const [action] = body;
+  const { action } = body;
   if (action === "create") {
     if (!body.authorId || !body.content) {
       return NextResponse.json(

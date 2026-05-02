@@ -13,14 +13,17 @@ export async function GET(request, { params }) {
 
 export async function DELETE(request, { params }) {
   const { id } = await params;
-  const body = await request.json();
-  if (!body.userId) {
+  const { searchParams } = new URL(request.url);
+  const userId = searchParams.get("userId");
+
+  if (!userId) {
     return NextResponse.json({ error: "userId is required" }, { status: 400 });
   }
-  const deletedPost = await postRepo.delete(id, body.userId);
-  if (!deletedPost.success) {
-    const status = deletedPost.error === "Post not found" ? 404 : 403;
-    return NextResponse.json({ deletedPost: deletedPost.error }, { status });
+
+  const result = await postRepo.delete(id, userId);
+  if (!result.success) {
+    const status = result.error === "Post not found" ? 404 : 403;
+    return NextResponse.json({ error: result.error }, { status });
   }
   return NextResponse.json({ message: "Post deleted" });
 }

@@ -32,6 +32,12 @@ const userRepo = {
     });
 },
 
+async deleteUser(id) {
+  return await prisma.user.delete({
+    where: { id: parseInt(id) },
+  });
+},
+
   async getAll() {
     return await prisma.user.findMany({
       include: {

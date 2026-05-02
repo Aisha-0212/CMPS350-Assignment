@@ -13,14 +13,13 @@ export async function GET(request, { params }) {
 
 export async function DELETE(request, { params }) {
   const { id } = await params;
-  const body = await request.json();
-  if (!body.userId) {
-    return NextResponse.json({ error: "userId is required" }, { status: 400 });
+  try {
+    await userRepo.deleteUser(id);
+    return NextResponse.json({ message: "User deleted" });
+  } catch (error) {
+    if (error.code === "P2025") {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+    return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
   }
-  const deleteduser = await userRepo.delete(id, body.userId);
-  if (!deleteduser.success) {
-    const status = deleteduser.error === "user not found" ? 404 : 403;
-    return NextResponse.json({ deleteduser: deleteduser.error }, { status });
-  }
-  return NextResponse.json({ message: "user deleted" });
 }

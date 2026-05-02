@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 const commentRepo = {
   async getByPost(postId) {
     return await prisma.comment.findMany({
-      where: { postId },
+      where: { postId: parseInt(postId) },
       include: { author: true },
       orderBy: { createdAt: "asc" },
     });
@@ -13,7 +13,7 @@ const commentRepo = {
 
   async getByUser(userId) {
     return await prisma.comment.findMany({
-      where: { authorId: userId },
+      where: { authortId: parseInt(authorId) },
       include: { post: true },
       orderBy: { createdAt: "desc" },
     });
@@ -36,7 +36,7 @@ const commentRepo = {
 
   async delete(commentId, userId) {
     const comment = await prisma.comment.findUnique({
-      where: { id: commentId },
+      where: { id: parseInt(commentId) },
     });
 
     if (!comment) {

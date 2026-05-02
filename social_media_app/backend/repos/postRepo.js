@@ -47,6 +47,13 @@ const postRepo = {
     });
   },
 
+  async getAll() {
+  return await prisma.post.findMany({
+    include: { author: true, likes: true, comments: true },
+    orderBy: { createdAt: "desc" },
+  });
+},
+
   async create(authorId, content) {
     authorId = parseInt(authorId);
     return await prisma.post.create({
@@ -76,32 +83,26 @@ const postRepo = {
   },
 
   async toggleLike(postId, userId) {
-    postId = parseInt(postId);
-    userId = parseInt(userId);
-    const post = await prisma.post.findUnique({ where: { id: postId } });
+  postId = parseInt(postId);
+  userId = parseInt(userId);
+  
+  const post = await prisma.post.findUnique({ where: { id: postId } });
+  if (!post) return { success: false, error: "Post not found" };
 
-    if (!post) {
-      return { success: false, error: "Post not found" };
-    }
+  const existing = await prisma.like.findUnique({
+    where: { userId_postId: { userId, postId } },  // ← fix
+  });
 
-    const existing = await prisma.like.findUnique({
-      where: { postId, userId },
+  if (existing) {
+    await prisma.like.delete({
+      where: { userId_postId: { userId, postId } },  // ← fix
     });
-
-    if (existing) {
-      // Already liked → unlike
-      await prisma.like.delete({
-    where: {
-        userId_postId: { userId, postId }
-    }
-});
-      return { success: true, liked: false };
-    } else {
-      // Not liked yet → like
-      await prisma.like.create({ data: { postId, userId } });
-      return { success: true, liked: true };
-    }
-  },
+    return { success: true, liked: false };
+  } else {
+    await prisma.like.create({ data: { postId, userId } });
+    return { success: true, liked: true };
+  }
+},
 };
 
 export default postRepo;

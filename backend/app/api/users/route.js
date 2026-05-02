@@ -1,9 +1,9 @@
 import {NextResponse} from "next/server";
-import UserRepo from "@/repos/UserRepo";
+import userRepo from "@/repos/userRepo";
 
 export async function GET(request) {
     const { searchParams } = new URL(request.url);
-    const users = await UserRepo.getAll();
+    const users = await userRepo.getAll();
     return NextResponse.json(users);
 }
 // body: {username, email, password}
@@ -15,7 +15,7 @@ export async function POST(request){
             {status: 400}
         )
     }
-    const newUser = await UserRepo.create(body);
+    const newUser = await userRepo.create(body);
     return NextResponse.json(newUser, { status: 201 });
 }
 export async function PATCH(request){
@@ -29,7 +29,7 @@ export async function PATCH(request){
             { status: 400 }
         );
     }
-    const updated = await UserRepo.updateBio(body.userId, body.bio!=null ? body.bio: "")
+    const updated = await userRepo.updateBio(body.userId, body.bio!=null ? body.bio: "")
     if(!updated){
         return NextResponse.json({ error: "User not found" }, { status: 404 });
     }

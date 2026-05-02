@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import PostRepo from "@/repos/PostRepo";
+import postRepo from "@/repos/postRepo";
 
 export async function GET(request, { params }) {
   const { id } = await params;
-  const post = await PostRepo.getById(id);
+  const post = await postRepo.getById(id);
 
   if (!post) {
     return NextResponse.json({ error: "Post not found" }, { status: 404 });
@@ -17,7 +17,7 @@ export async function DELETE(request, { params }) {
   if (!body.userId) {
     return NextResponse.json({ error: "userId is required" }, { status: 400 });
   }
-  const deletedPost = await PostRepo.delete(id, body.userId);
+  const deletedPost = await postRepo.delete(id, body.userId);
   if (!deletedPost.success) {
     const status = deletedPost.error === "Post not found" ? 404 : 403;
     return NextResponse.json({ deletedPost: deletedPost.error }, { status });

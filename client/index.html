@@ -19,19 +19,13 @@
     </div>
   </div>
 
-  <script src="JavaScript/storage.js"></script>
   <script src="JavaScript/utils.js"></script>
   <script src="JavaScript/auth.js"></script>
   <script>
-    initAppData();
-    
-    setTimeout(function () {
-        if (isLoggedIn()) {
-            window.location.href = "feed.html";
-        } else {
-            window.location.href = "login.html";
-        }
-    }, 2000);
+    // No localStorage, so we simply go to login page
+  setTimeout(() => {
+    window.location.href = 'login.html';
+  }, 2000);
   </script>
 
 </body>

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import StatsRepo from "@/repos/StatsRepo";
+import statsRepo from "@/repos/statsRepo";
 
 export async function GET(request, { params }) {
   const [
@@ -12,14 +12,14 @@ export async function GET(request, { params }) {
     topCommenters,
     mostFollowed,
   ] = await Promise.allSettled([
-    StatsRepo.getAverageFollowersPerUser(),
-    StatsRepo.getAveragePostsPerUser(),
-    StatsRepo.getMostActiveUser(),
-    StatsRepo.getMostLikedPost(),
-    StatsRepo.getPostsPerMonth(),
-    StatsRepo.getMostCommonWord(),
-    StatsRepo.getTopCommenters(),
-    StatsRepo.getMostFollowedUser(),
+    statsRepo.getAverageFollowersPerUser(),
+    statsRepo.getAveragePostsPerUser(),
+    statsRepo.getMostActiveUser(),
+    statsRepo.getMostLikedPost(),
+    statsRepo.getPostsPerMonth(),
+    statsRepo.getMostCommonWord(),
+    statsRepo.getTopCommenters(),
+    statsRepo.getMostFollowedUser(),
   ]);
   const stats = {
     avgFollowers,

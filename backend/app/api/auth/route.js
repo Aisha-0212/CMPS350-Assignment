@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import UserRepo from "@/repos/UserRepo";
+import userRepo from "@/repos/userRepo";
 
 export async function POST(request) {
   const body = await request.json();
@@ -13,7 +13,7 @@ export async function POST(request) {
         { status: 400 },
       );
     }
-    const user = await UserRepo.getByEmail(email);
+    const user = await userRepo.getByEmail(email);
     if (!user || user.password !== password) {
       return NextResponse.json(
         { error: "Incorrect email or password" },
@@ -37,7 +37,7 @@ export async function POST(request) {
         { status: 400 },
       );
     }
-    const newFollow = await UserRepo.followUser(followerId, followeeId);
+    const newFollow = await userRepo.followUser(followerId, followeeId);
     return NextResponse.json(newFollow, { status: 201 });
   }
 
@@ -55,7 +55,7 @@ export async function POST(request) {
         { status: 400 },
       );
     }
-    const newUnfollow = await UserRepo.unfollowUser(followerId, followeeId);
+    const newUnfollow = await userRepo.unfollowUser(followerId, followeeId);
     return NextResponse.json(newUnfollow, { status: 201 });
   }
 

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import CommentRepo from "@/repos/CommentRepo";
+import commentRepo from "@/repos/commentRepo";
 
 export async function GET(request, {params}){
     const {searchParams} = new URL(request.url);
@@ -10,7 +10,7 @@ export async function GET(request, {params}){
             { status: 400 }
         );
     }
-    const comments = await CommentRepo.getByPost(postId);
+    const comments = await commentRepo.getByPost(postId);
     return NextResponse.json(comments);
 }
 
@@ -24,7 +24,7 @@ export async function POST(request, {params}){
                 {status: 400}
             )
         }
-        const postedComment = await CommentRepo.add(body.postId, body.authorId, body.content.trim());
+        const postedComment = await commentRepo.add(body.postId, body.authorId, body.content.trim());
         if(!postedComment.success){
             return NextResponse.json({ error: postedComment.error }, { status: 404 });
         }
@@ -38,7 +38,7 @@ export async function POST(request, {params}){
                 { status: 400 }
             );
         }
-        const result = await CommentRepo.delete(body.commentId, body.userId);
+        const result = await commentRepo.delete(body.commentId, body.userId);
         if (!result.success) {
             const status = result.error === "Comment not found" ? 404 : 403;
             return NextResponse.json({ error: result.error }, { status });

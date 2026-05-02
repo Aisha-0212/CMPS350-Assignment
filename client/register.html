@@ -43,47 +43,36 @@
         </p>
     </div>
 </div>
-
-<script src="JavaScript/storage.js"></script>
 <script src="JavaScript/utils.js"></script>
 <script src="JavaScript/auth.js"></script>
 
 <script>
-    //init data
-    initAppData();
-    //redirect if already logged in
-    if (isLoggedIn()) {
-        window.location.href = "feed.html";
+   if (isLoggedIn()) {
+    window.location.href = "feed.html";
+  }
+  const form = document.getElementById("registerForm");
+  form.addEventListener("submit", async function(e) {
+    e.preventDefault();
+    clearErrors();
+    const username = document.getElementById("username").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const confirm = document.getElementById("confirmPassword").value;
+    if (password !== confirm) {
+      showError("confirmError", "Passwords do not match");
+      return;
     }
-    const form = document.getElementById("registerForm");
-    form.addEventListener("submit", function(e) {
-        e.preventDefault();
-        clearErrors();
-        let username = document.getElementById("username").value.trim();
-        let email = document.getElementById("email").value.trim();
-        let password = document.getElementById("password").value;
-        let confirm = document.getElementById("confirmPassword").value;
-        if (password != confirm) {
-            showError("confirmError", "Passwords do not match");
-            return;
-        }
-        let result = registerUser(username, email, password);
-        if (result.success) {
-            window.location.href = "feed.html";
-        } else {
-            let msg = result.message.toLowerCase();
-            if (msg.indexOf("username") !== -1) {
-                showError("usernameError", result.message);
-            } else if (msg.indexOf("email") !== -1) {
-                showError("emailError", result.message);
-            } else if (msg.indexOf("password") !== -1) {
-                showError("passwordError", result.message);
-            } else {
-                showError("emailError", result.message);
-            }
-        }
-    });
-
+    const result = await registerUser(username, email, password);
+    if (result.success) {
+      window.location.href = `feed.html?userId=${result.user.id}`;
+    } else {
+      const msg = result.message.toLowerCase();
+      if (msg.includes("username")) showError("usernameError", result.message);
+      else if (msg.includes("email")) showError("emailError", result.message);
+      else if (msg.includes("password")) showError("passwordError", result.message);
+      else showError("emailError", result.message);
+    }
+  });
 
 
 

@@ -32,37 +32,33 @@
     </div>
 </div>
 
-<script src="JavaScript/storage.js"></script>
 <script src="JavaScript/utils.js"></script>
 <script src="JavaScript/auth.js"></script>
 <script>
-    initAppData();
-    if (isLoggedIn()) {
-        window.location.href = "feed.html";
-    }
     const form = document.getElementById("loginForm");
-    form.addEventListener("submit", function(e) {
-        e.preventDefault();
-        document.getElementById("emailError").textContent = "";
-        document.getElementById("passwordError").textContent = "";
-        let email = document.getElementById("email").value.trim();
-        let password = document.getElementById("password").value;
-        if (email === "" || password === "") {
-            document.getElementById("passwordError").textContent = "Email and password are required";
-            return;
-        }
-        let result = loginUser(email, password);
-        if (result.success) {
-            window.location.href = "feed.html";
-        } else {
-            let msg = result.message.toLowerCase();
-            if (msg.indexOf("email") !== -1 || msg.indexOf("account") !== -1) {
-                document.getElementById("emailError").textContent = result.message;
-            } else {
-                document.getElementById("passwordError").textContent = result.message;
-            }
-        }
-    });
+    form.addEventListener("submit", async function(e) {
+    e.preventDefault();
+    document.getElementById("emailError").textContent = "";
+    document.getElementById("passwordError").textContent = "";
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    if (!email || !password) {
+      document.getElementById("passwordError").textContent = "Email and password are required";
+      return;
+    }
+    const result = await loginUser(email, password);
+    if (result.success) {
+      window.location.href = `feed.html?userId=${result.user.id}`;
+    } else {
+      const msg = result.message.toLowerCase();
+      if (msg.includes("email") || msg.includes("account")) {
+        document.getElementById("emailError").textContent = result.message;
+      } else {
+        document.getElementById("passwordError").textContent = result.message;
+      }
+    }
+  });
+
 </script>
 </body>
 </html>

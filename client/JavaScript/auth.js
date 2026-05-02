@@ -15,7 +15,7 @@ async function getCurrentUserData(userId) {
 
 // Register – returns { success, message, user }
 async function registerUser(username, email, password) {
-  const res = await fetch(`${API_BASE}/users/`, {
+  const res = await fetch(`${API_BASE}/users`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username, email, password })

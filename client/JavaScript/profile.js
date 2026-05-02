@@ -196,8 +196,9 @@ async function getUserProfile(userId) {
       document.getElementById('profile-pic').src = e.target.result;
     };
     reader.readAsDataURL(file);
-    document.getElementById('feed-link').href = `feed.html?userId=${CURRENT_USER_ID}`;
   });
+  document.getElementById('follow-btn').style.display = 'none';
+  document.getElementById('feed-link').href = `feed.html?userId=${CURRENT_USER_ID}`;
 })()
 
 

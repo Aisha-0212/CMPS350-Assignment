@@ -26,6 +26,15 @@ const postRepo = {
     });
   },
 
+  async getByAuthor(authorId) {
+    authorId = parseInt(authorId);
+    return await prisma.post.findMany({
+        where: { authorId },
+        include: { author: true, likes: true, comments: true },
+        orderBy: { createdAt: 'desc' }
+    });
+},
+
   async getById(id) {
     id = parseInt(id);
     return await prisma.post.findUnique({

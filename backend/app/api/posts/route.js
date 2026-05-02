@@ -10,7 +10,7 @@ export async function GET(request) {
     return NextResponse.json(posts);
   }
   if (authorId) {
-    const posts = await postRepo.getFeedPosts(authorId);
+    const posts = await postRepo.getByAuthor(authorId);
     return NextResponse.json(posts);
   }
   return NextResponse.json(

@@ -5,7 +5,12 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const userId = searchParams.get("userId");
   const authorId = searchParams.get("authorId");
+  const search = searchParams.get("search");
 
+  if (search) {
+    const posts = await postRepo.search(search);
+    return NextResponse.json(posts);
+  }
   if (userId) {
     const posts = await postRepo.getFeedPosts(userId);
     return NextResponse.json(posts);

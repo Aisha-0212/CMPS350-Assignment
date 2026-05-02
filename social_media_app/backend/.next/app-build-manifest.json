@@ -1,10 +1,5 @@
 {
   "pages": {
-    "/api/users/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/users/route.js"
-    ],
     "/api/posts/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -15,35 +10,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/api/users/[id]/route.js"
     ],
-    "/layout": [
+    "/api/users/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/layout.js"
-    ],
-    "/api/stats/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/stats/route.js"
-    ],
-    "/api/posts/[id]/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/posts/[id]/route.js"
-    ],
-    "/api/comments/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/comments/route.js"
-    ],
-    "/api/posts/[id]/like/route": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/api/posts/[id]/like/route.js"
-    ],
-    "/_not-found/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/api/users/route.js"
     ]
   }
 }

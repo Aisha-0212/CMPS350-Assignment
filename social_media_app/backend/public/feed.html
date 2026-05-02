@@ -4,9 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Feed - Social Synapse</title>
-
-  <!-- CSS -->
-
   <link rel="stylesheet" href="CSS/components.css">
   <link rel="stylesheet" href="CSS/layout.css">
   <link rel="stylesheet" href="CSS/style.css">
@@ -14,25 +11,33 @@
 
 <body>
 
-
-  <!-- ===== Navbar ===== -->
   <nav class="navbar">
-  <h1>Social Synapse</h1>
-  <ul>
-    <li><a href="login.html">Login</a></li>
-    <li><a href="register.html">Register</a></li>
-    <li><a href="feed.html">Feed</a></li>
-    <li><a id="profile-link" href="profile.html">Profile</a></li>
-    <li><a href="#" onclick="logoutUser(); window.location.href='index.html';">Logout</a></li>
-  </ul>
-</nav>
+    <h1>Social Synapse</h1>
+    <ul>
+      <li><a href="feed.html">Feed</a></li>
+      <li><a id="profile-link" href="profile.html">Profile</a></li>
+      <li><a href="/stats">Stats</a></li>
+      <li><a href="#" onclick="logoutUser(); window.location.href='index.html';">Logout</a></li>
+    </ul>
+  </nav>
 
-  <!-- ===== Main Container ===== -->
   <main class="container">
-    <!-- ===== Feed Section ===== -->
     <section class="feed">
 
-      <!-- ===== Create Post ===== -->
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search posts or users...">
+        <button id="search-btn">Search</button>
+      </div>
+
+      <!-- Search Results (hidden until search is triggered) -->
+      <div id="search-results">
+        <span class="close-search" id="close-search">✕ Clear</span>
+        <h3 id="search-results-title">Results</h3>
+        <div id="search-results-content"></div>
+      </div>
+
+      <!-- Create Post -->
       <article class="create-post">
         <h2>Create Post</h2>
         <textarea id="post-input" placeholder="What's on your mind?"></textarea>
@@ -40,28 +45,23 @@
         <p id="post-error" style="color:red;"></p>
       </article>
 
-      <!-- ===== Posts Container ===== -->
-      <section id="posts-container">
-      
-      </section>
+      <!-- Posts -->
+      <section id="posts-container"></section>
 
     </section>
-   
 
-    <!-- ===== Right Sidebar ===== -->
     <aside class="sidebar">
       <h3>Suggestions</h3>
       <ul id="users-list"></ul>
     </aside>
-
   </main>
 
-  <!-- ===== JS ===== -->
   <script src="JavaScript/utils.js"></script>
   <script src="JavaScript/auth.js"></script>
   <script src="JavaScript/posts.js"></script>
   <script src="JavaScript/profile.js"></script>
   <script src="JavaScript/feed.js"></script>
+  <script src="JavaScript/search.js"></script>
 
 </body>
 </html>

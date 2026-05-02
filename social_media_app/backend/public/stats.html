@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statistics - Social Synapse</title>
+  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="stylesheet" href="CSS/layout.css">
+  <link rel="stylesheet" href="CSS/components.css">
+</head>
+
+<body>
+  <nav class="navbar">
+    <h1>Social Synapse</h1>
+    <ul>
+      <li><a id="feed-link" href="feed.html">Feed</a></li>
+      <li><a href="#" onclick="window.location.href='login.html';">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="stats-container">
+    <div>
+      <h1>Platform Statistics</h1>
+      <p class="subtitle">Overview of activity across Social Synapse</p>
+    </div>
+
+    <div id="stats-content">
+      <p class="loading-text">Loading statistics...</p>
+    </div>
+  </div>
+
+  <script src="JavaScript/auth.js"></script>
+  <script src="JavaScript/stats.js"></script>
+</body>
+</html>

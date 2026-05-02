@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const statsRepo = {
-  // Stat 1: Average number of followers per user — aggregated in DB
+  // Stat 1: Average number of followers per user
   async getAverageFollowersPerUser() {
     const result = await prisma.follow.groupBy({
       by: ["followeeId"],
@@ -14,7 +14,7 @@ const statsRepo = {
     return parseFloat((total / result.length).toFixed(2));
   },
 
-  // Stat 2: Average number of posts per user — aggregated in DB
+  // Stat 2: Average number of posts per user
   async getAveragePostsPerUser() {
     const result = await prisma.post.groupBy({
       by: ["authorId"],
@@ -25,7 +25,7 @@ const statsRepo = {
     return parseFloat((total / result.length).toFixed(2));
   },
 
-  // Stat 3: Most active user (most posts) — sorted and limited in DB
+  // Stat 3: Most active user (most posts)
   async getMostActiveUser() {
     const result = await prisma.post.groupBy({
       by: ["authorId"],
@@ -35,15 +35,14 @@ const statsRepo = {
     });
     if (!result.length) return null;
 
-    const top = result[0];
     const user = await prisma.user.findUnique({
-      where: { id: top.authorId },
+      where: { id: result[0].authorId },
       select: { id: true, username: true },
     });
-    return { userId: user.id, username: user.username, postCount: top._count.id };
+    return { userId: user.id, username: user.username, postCount: result[0]._count.id };
   },
 
-  // Stat 4: Most liked post — sorted and limited in DB
+  // Stat 4: Most liked post
   async getMostLikedPost() {
     const result = await prisma.like.groupBy({
       by: ["postId"],
@@ -53,15 +52,14 @@ const statsRepo = {
     });
     if (!result.length) return null;
 
-    const top = result[0];
     const post = await prisma.post.findUnique({
-      where: { id: top.postId },
-      select: { id: true, content: true, authorId: true },
+      where: { id: result[0].postId },
+      select: { id: true, content: true },
     });
-    return { postId: post.id, content: post.content, likes: top._count.userId };
+    return { postId: post.id, content: post.content, likes: result[0]._count.userId };
   },
 
-  // Stat 5: Number of posts per month — aggregated via raw SQL in DB
+  // Stat 5: Posts per month — raw SQL, BigInt safely converted
   async getPostsPerMonth() {
     const rows = await prisma.$queryRaw`
       SELECT strftime('%Y-%m', createdAt) AS month, COUNT(*) AS count
@@ -69,18 +67,20 @@ const statsRepo = {
       GROUP BY month
       ORDER BY month ASC
     `;
+    // COUNT(*) returns BigInt in Prisma raw queries — convert explicitly
     return rows.map((r) => ({ month: r.month, count: Number(r.count) }));
   },
 
-  // Stat 6: Most frequently used word across all post content
-  // Only content strings are fetched — word-counting must be done in JS
-  // since SQLite has no built-in tokeniser.
+  // Stat 6: Most frequently used word in posts
   async getMostCommonWord() {
     const posts = await prisma.post.findMany({ select: { content: true } });
+    if (!posts.length) return { word: "", count: 0 };
+
     const stopWords = new Set([
       "the", "a", "an", "is", "in", "it", "to", "and", "of", "for",
       "on", "at", "by", "my", "i", "this", "that", "with", "are", "was",
       "be", "but", "not", "or", "so", "we", "you", "he", "she", "they",
+      "just", "so", "up", "out", "if", "about", "who", "get", "which",
     ]);
 
     const map = {};
@@ -95,15 +95,12 @@ const statsRepo = {
     let topWord = "";
     let topCount = 0;
     for (const [word, count] of Object.entries(map)) {
-      if (count > topCount) {
-        topCount = count;
-        topWord = word;
-      }
+      if (count > topCount) { topCount = count; topWord = word; }
     }
     return { word: topWord, count: topCount };
   },
 
-  // Stat 7: Top 3 commenters — sorted and limited in DB
+  // Stat 7: Top 3 commenters
   async getTopCommenters() {
     const result = await prisma.comment.groupBy({
       by: ["authorId"],
@@ -112,7 +109,7 @@ const statsRepo = {
       take: 3,
     });
 
-    const enriched = await Promise.all(
+    return await Promise.all(
       result.map(async (r) => {
         const user = await prisma.user.findUnique({
           where: { id: r.authorId },
@@ -121,10 +118,9 @@ const statsRepo = {
         return { userId: user.id, username: user.username, commentCount: r._count.id };
       })
     );
-    return enriched;
   },
 
-  // Stat 8: Most followed user — sorted and limited in DB
+  // Stat 8: Most followed user
   async getMostFollowedUser() {
     const result = await prisma.follow.groupBy({
       by: ["followeeId"],
@@ -134,12 +130,11 @@ const statsRepo = {
     });
     if (!result.length) return null;
 
-    const top = result[0];
     const user = await prisma.user.findUnique({
-      where: { id: top.followeeId },
+      where: { id: result[0].followeeId },
       select: { id: true, username: true },
     });
-    return { userId: user.id, username: user.username, followers: top._count.followerId };
+    return { userId: user.id, username: user.username, followers: result[0]._count.followerId };
   },
 };
 

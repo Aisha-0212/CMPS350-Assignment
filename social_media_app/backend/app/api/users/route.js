@@ -18,6 +18,7 @@ export async function POST(request) {
   const body = await request.json();
   const { action } = body;
 
+  // --- Login ---
   if (action === "login") {
     const { email, password } = body;
     if (!email || !password) {
@@ -36,6 +37,7 @@ export async function POST(request) {
     return NextResponse.json(user);
   }
 
+  // --- Follow ---
   if (action === "follow") {
     const { followerId, followeeId } = body;
     if (!followerId || !followeeId) {
@@ -50,10 +52,19 @@ export async function POST(request) {
         { status: 400 }
       );
     }
-    const result = await userRepo.followUser(followerId, followeeId);
-    return NextResponse.json(result, { status: 201 });
+    try {
+      const result = await userRepo.followUser(followerId, followeeId);
+      return NextResponse.json(result, { status: 201 });
+    } catch (error) {
+      if (error.code === "P2002") {
+        // Already following — treat as success so the UI stays consistent
+        return NextResponse.json({ message: "Already following" }, { status: 200 });
+      }
+      return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
+    }
   }
 
+  // --- Unfollow ---
   if (action === "unfollow") {
     const { followerId, followeeId } = body;
     if (!followerId || !followeeId) {
@@ -69,10 +80,10 @@ export async function POST(request) {
       );
     }
     const result = await userRepo.unfollowUser(followerId, followeeId);
-    return NextResponse.json(result, { status: 201 });
+    return NextResponse.json(result, { status: 200 });
   }
 
-  // Registration
+  // --- Registration ---
   if (!body.username || !body.email || !body.password) {
     return NextResponse.json(
       { error: "username, email, and password are required" },

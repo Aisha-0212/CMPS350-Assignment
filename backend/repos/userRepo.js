@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const UserRepo = {
+const userRepo = {
   async getUserById(id) {
     return await prisma.user.findUnique({
       where: { id },
@@ -13,6 +13,24 @@ const UserRepo = {
       },
     });
   },
+
+  async getById(id) {
+    return await prisma.user.findUnique({
+        where: { id: parseInt(id) },
+        include: {
+            posts: true,
+            followers: true,
+            following: true,
+            _count: {
+                select: {
+                    posts: true,
+                    followers: true,
+                    following: true
+                }
+            }
+        }
+    });
+},
 
   async getAll() {
     return await prisma.user.findMany({

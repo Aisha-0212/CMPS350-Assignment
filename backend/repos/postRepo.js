@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const PostRepo = {
+const postRepo = {
   async getFeedPosts(userId) {
     // Get IDs of users that userId follows
     const following = await prisma.follow.findMany({
@@ -27,6 +27,7 @@ const PostRepo = {
   },
 
   async getById(id) {
+    id = parseInt(id);
     return await prisma.post.findUnique({
       where: { id },
       include: {
@@ -38,6 +39,7 @@ const PostRepo = {
   },
 
   async create(authorId, content) {
+    authorId = parseInt(authorId);
     return await prisma.post.create({
       data: { authorId, content },
       include: {
@@ -49,6 +51,8 @@ const PostRepo = {
   },
 
   async delete(postId, userId) {
+    postId = parseInt(postId);
+    userId = parseInt(userId);
     const post = await prisma.post.findUnique({ where: { id: postId } });
 
     if (!post) {
@@ -63,19 +67,25 @@ const PostRepo = {
   },
 
   async toggleLike(postId, userId) {
+    postId = parseInt(postId);
+    userId = parseInt(userId);
     const post = await prisma.post.findUnique({ where: { id: postId } });
 
     if (!post) {
       return { success: false, error: "Post not found" };
     }
 
-    const existing = await prisma.like.findFirst({
+    const existing = await prisma.like.findUnique({
       where: { postId, userId },
     });
 
     if (existing) {
       // Already liked → unlike
-      await prisma.like.delete({ where: { id: existing.id } });
+      await prisma.like.delete({
+    where: {
+        userId_postId: { userId, postId }
+    }
+});
       return { success: true, liked: false };
     } else {
       // Not liked yet → like

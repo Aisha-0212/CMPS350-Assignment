@@ -1,8 +1,8 @@
-import UserRepo from "./UserRepo.js";
-import PostRepo from "./PostRepo.js";
-import CommentRepo from "./CommentRepo.js";
+import userRepo from "./userRepo.js";
+import postRepo from "./postRepo.js";
+import commentRepo from "./commentRepo.js";
 
-const StatsRepo = {
+const statsRepo = {
   async getAverageFollowersPerUser() {
     const users = await UserRepo.getAll();
     if (!users.length) return 0;
@@ -42,13 +42,9 @@ const StatsRepo = {
   },
 
   async getMostLikedPost() {
-    const users = await UserRepo.getAll();
-    let allPosts = [];
-
-    for (const u of users) {
-      const posts = await PostRepo.getFeedPosts(u.id);
-      allPosts = allPosts.concat(posts);
-    }
+    const allPosts = await prisma.post.findMany({
+    include: { likes: true, author: true }
+});
 
     if (!allPosts.length) return null;
 

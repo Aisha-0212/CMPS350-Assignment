@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const CommentRepo = {
+const commentRepo = {
   async getByPost(postId) {
     return await prisma.comment.findMany({
       where: { postId },
